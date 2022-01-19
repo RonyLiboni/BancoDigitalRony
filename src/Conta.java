@@ -3,9 +3,15 @@ public abstract class Conta {
 	private int agencia=3545;
 	private int numero;
 	private double saldo=0;
+	private Cliente cliente;
 	
 	public Conta(int numero) {
 		this.numero=numero;
+	}
+	
+	public Conta(int numero, String nome, String cpf) {
+		this.numero=numero;
+		this.cliente = new Cliente(nome,cpf);
 	}
 	
 	public void sacar(double valor) {
@@ -28,11 +34,10 @@ public abstract class Conta {
 			System.out.println("Não foi possível fazer a transferência!!");
 		}
 			
-		
 	}
 	
 	public void extratoConta() {
-		System.out.println("O numero da sua conta é"+this.numero+" e sua agencia é "+this.agencia);
+		System.out.println("Olá, "+this.getCliente().getNome() +" o numero da sua conta é "+this.numero+" e sua agencia é "+this.agencia);
 		System.out.println("Seu saldo atual é "+this.saldo);
 	}
 
@@ -40,8 +45,13 @@ public abstract class Conta {
 		return saldo;
 	}
 
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	
