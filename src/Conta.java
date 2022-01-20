@@ -31,9 +31,8 @@ public abstract class Conta {
 			this.sacar(valor);
 			destino.depositar(valor);
 		} else {
-			System.out.println("Não foi possível fazer a transferência!!");
-		}
-			
+			System.out.println("Não há saldo suficiente para esta transferência!!");
+		}					
 	}
 	
 	public void extratoConta() {
