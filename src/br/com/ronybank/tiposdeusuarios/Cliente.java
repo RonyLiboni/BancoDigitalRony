@@ -1,3 +1,6 @@
+package br.com.ronybank.tiposdeusuarios;
+
+
 
 public class Cliente {
 	private String nome;

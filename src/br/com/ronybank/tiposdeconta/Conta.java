@@ -1,6 +1,16 @@
+package br.com.ronybank.tiposdeconta;
+
+import br.com.ronybank.tiposdeusuarios.Cliente;
+
+/**
+ * Classe representa a moldura do minimo que uma conta deve ter
+ * @author Ronald Liboni
+ * @version 0.1
+ *
+ */
 
 public abstract class Conta {
-	private int agencia=3545;
+	private int agencia=0001;
 	private int numero;
 	private double saldo=0;
 	private Cliente cliente;
@@ -9,6 +19,12 @@ public abstract class Conta {
 		this.numero=numero;
 	}
 	
+	/**
+	 * Construtor faz conta e ja cria vincula ela a um cliente
+	 * @param numero
+	 * @param nome
+	 * @param cpf
+	 */
 	public Conta(int numero, String nome, String cpf) {
 		this.numero=numero;
 		this.cliente = new Cliente(nome,cpf);

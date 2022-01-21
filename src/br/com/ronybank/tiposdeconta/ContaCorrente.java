@@ -1,3 +1,4 @@
+package br.com.ronybank.tiposdeconta;
 
 public class ContaCorrente extends Conta {
 	
