@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"br.com.ronybank.testes"},{"l":"br.com.ronybank.tiposdeconta"},{"l":"br.com.ronybank.tiposdeusuarios"}];updateSearchResults();

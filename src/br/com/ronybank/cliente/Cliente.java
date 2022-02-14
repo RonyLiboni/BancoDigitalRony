@@ -1,4 +1,4 @@
-package br.com.ronybank.tiposdeusuarios;
+package br.com.ronybank.cliente;
 
 
 

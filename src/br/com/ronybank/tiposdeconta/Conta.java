@@ -1,73 +1,60 @@
 package br.com.ronybank.tiposdeconta;
 
-import br.com.ronybank.tiposdeusuarios.Cliente;
+import java.math.BigDecimal;
 
-/**
- * Classe representa a moldura do minimo que uma conta deve ter
- * @author Ronald Liboni
- * @version 0.1
- *
- */
+import br.com.ronybank.cliente.Cliente;
+
 
 public abstract class Conta {
 	private int agencia=0001;
 	private int numero;
-	private double saldo=0;
+	private BigDecimal saldo= new BigDecimal("0.00");
 	private Cliente cliente;
+	private boolean contaEstaAtiva;
 	
 	public Conta(int numero) {
 		this.numero=numero;
 	}
 	
-	/**
-	 * Construtor faz conta e ja cria vincula ela a um cliente
-	 * @param numero
-	 * @param nome
-	 * @param cpf
-	 */
 	public Conta(int numero, String nome, String cpf) {
 		this.numero=numero;
 		this.cliente = new Cliente(nome,cpf);
 	}
 	
-	public void sacar(double valor) {
-		if (this.saldo>valor) {
-			this.saldo-=valor;	
-		} else {
-			System.out.println("Saldo insuficiente! Você tem "+this.saldo+" disponível.");
-		}
+	public void sacar(BigDecimal valor) {
+		if (this.saldo.compareTo(valor)==-1 )  
+			return;
+		this.saldo=this.saldo.subtract(valor);
 	}
 		
-	public void depositar(double valor) {
-		this.saldo+=valor;
+	public void depositar(BigDecimal valor) {
+		this.saldo = this.saldo.add(valor);
 	}
 	
-	public void transferir(double valor, Conta destino) {
-		if (this.saldo>valor) {
-			this.sacar(valor);
-			destino.depositar(valor);
-		} else {
-			System.out.println("Não há saldo suficiente para esta transferência!!");
-		}					
+	public String transferir(BigDecimal valor, Conta destino) {
+		
+		if (this.saldo.compareTo(valor)==-1) return "Saldo insuficiente!";	
+				
+		this.sacar(valor);
+		destino.depositar(valor);	// validar destino jogar exceção?
+		return "Transferência feita com sucesso!";
 	}
 	
 	public void extratoConta() {
-		System.out.println("Olá, "+this.getCliente().getNome() +" o numero da sua conta é "+this.numero+" e sua agencia é "+this.agencia);
-		System.out.println("Seu saldo atual é "+this.saldo);
+		System.out.println(this.getCliente().getNome()+", seu saldo atual é "+this.saldo);
 	}
 
-	public double getSaldo() {
+	public BigDecimal getSaldo() {
 		return saldo;
 	}
-
 
 	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	@Override
+	public String toString() {
+		return "Agência: "+this.agencia+". Número da Conta: "+this.numero;
 	}
-	
 	
 }
