@@ -1,7 +1,6 @@
 package br.com.ronybank.tiposdeconta.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -74,13 +73,7 @@ public class ContaCorrenteTest {
 			assertEquals(new BigDecimal("00.00"), saldo1);
 		}
 		
-//		@Test
-//		public void transferirParaContaDestinoInexistente() {
-//			this.conta.get(0).transferir(new BigDecimal ("555"),this.conta.get(2));
-//			assertThrows(NaoExisteEssaContaException.class,
-//					() -> this.conta.get(0).transferir(new BigDecimal ("555"),this.conta.get(2)));
-//		}
-	
+
 		
 		
 		

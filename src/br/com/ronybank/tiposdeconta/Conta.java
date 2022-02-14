@@ -19,6 +19,7 @@ public abstract class Conta {
 	public Conta(int numero, String nome, String cpf) {
 		this.numero=numero;
 		this.cliente = new Cliente(nome,cpf);
+		this.contaEstaAtiva=true;
 	}
 	
 	public void sacar(BigDecimal valor) {
@@ -40,16 +41,15 @@ public abstract class Conta {
 		return "Transferência feita com sucesso!";
 	}
 	
-	public void extratoConta() {
-		System.out.println(this.getCliente().getNome()+", seu saldo atual é "+this.saldo);
-	}
-
 	public BigDecimal getSaldo() {
 		return saldo;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public String fecharConta() {
+		if (this.saldo != new BigDecimal("0")) return "Para fechar sua conta, ela deve estar com saldo de zero reais e sem faturas pendentes";
+		
+		this.contaEstaAtiva=false;
+		return "Conta fechada com sucesso!";	
 	}
 
 	@Override

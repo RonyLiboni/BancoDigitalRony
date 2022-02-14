@@ -1,7 +1,5 @@
 package br.com.ronybank.cliente;
 
-
-
 public class Cliente {
 	private String nome;
 	private String cpf;
