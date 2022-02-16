@@ -2,29 +2,22 @@ package br.com.ronybank.main;
 
 import java.math.BigDecimal;
 
-import br.com.ronybank.cliente.Cliente;
 import br.com.ronybank.tiposdeconta.ContaCorrente;
 
 public class Main {
-
 	public static void main(String[] args) {
-			
-		ContaCorrente cc =new ContaCorrente(6565,"Rony","156.587.655-85");
-		ContaCorrente cp =new ContaCorrente(1313,"Ka","000.565.655-36");
-
+		ContaCorrente cc0 = new ContaCorrente("Rony","1.2.3.4");
+		ContaCorrente cc1 = new ContaCorrente("Ka","1.28-48.4");
 		
-		cc.depositar(new BigDecimal("5535"));
-		cc.sacar(new BigDecimal("300"));
-		cc.transferir(new BigDecimal("522"), cp);
-
-		System.out.println();
-		cc.extratoConta();
-		System.out.println();
-		cp.extratoConta();
-		System.out.println(cc);
-		
+		cc0.depositar(new BigDecimal("1562"));
+		cc0.depositar(new BigDecimal("88"));
+		cc0.depositar(new BigDecimal("40.85"));
+		cc0.sacar(new BigDecimal("600"));
+		cc0.transferir(new BigDecimal("100"),cc1);
+		cc0.transferir(new BigDecimal("100"),cc1);
+		cc0.extratoBancario.forEach(ex->System.out.println(ex));
 	
 		
+		
 	}
-
 }

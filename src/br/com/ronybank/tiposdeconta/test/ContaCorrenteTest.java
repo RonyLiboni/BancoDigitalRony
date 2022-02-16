@@ -1,5 +1,6 @@
 package br.com.ronybank.tiposdeconta.test;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import br.com.ronybank.exceptions.contaInativaException;
 import br.com.ronybank.tiposdeconta.ContaCorrente;
 
 public class ContaCorrenteTest {
@@ -18,8 +20,8 @@ public class ContaCorrenteTest {
 	
 		@BeforeEach
 		private void inicializar() {
-			this.conta.add(new ContaCorrente(6565,"Rony","156.587.655-85"));
-			this.conta.add(new ContaCorrente(3558,"Ka","156.587.655-85"));
+			this.conta.add(new ContaCorrente("Rony","156.587.655-85"));
+			this.conta.add(new ContaCorrente("Ka","156.587.645-85"));
 			this.conta.get(0).depositar(new BigDecimal("1555"));
 		}
 		
@@ -48,6 +50,7 @@ public class ContaCorrenteTest {
 			getSaldos();
 			assertEquals(new BigDecimal("1555.00"), saldo0); 
 		}
+			
 		
 		@Test
 		public void transferirComSaldoMaiorQueOSuficiente() {
@@ -73,7 +76,42 @@ public class ContaCorrenteTest {
 			assertEquals(new BigDecimal("00.00"), saldo1);
 		}
 		
-
+		@Test
+		public void fecharContaSemSaldo() {
+			assertEquals("Conta fechada com sucesso!", this.conta.get(1).fecharConta());
+		}
+		
+		@Test
+		public void fecharContaComSaldo() {
+			assertEquals("Para fechar sua conta, ela deve estar com saldo de zero reais!", this.conta.get(0).fecharConta());
+		}
+		
+		@Test
+		public void fecharContaFechada() {
+			this.conta.get(1).fecharConta();
+			assertEquals("Sua conta já está fechada!", this.conta.get(1).fecharConta());
+		}
+		
+		@Test
+		public void sacarComContaFechadaLancaContaInativaException() {
+			this.conta.get(1).fecharConta();
+			assertThrows(contaInativaException.class,
+					() -> this.conta.get(1).sacar(saldo0));
+		}
+		
+		@Test
+		public void depositarComContaFechadaLancaContaInativaException() {
+			this.conta.get(1).fecharConta();
+			assertThrows(contaInativaException.class,
+					() -> this.conta.get(1).depositar(saldo0));
+		}
+		
+		@Test
+		public void transferirComContaFechadaLancaContaInativaException() {
+			this.conta.get(1).fecharConta();
+			assertThrows(contaInativaException.class,
+					() -> this.conta.get(1).transferir(saldo0,this.conta.get(0)));
+		}
 		
 		
 		
